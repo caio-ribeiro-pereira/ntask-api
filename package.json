@@ -8,6 +8,7 @@
   },
   "author": "Caio Ribeiro Pereira",
   "dependencies": {
+    "body-parser": "^1.13.3",
     "consign": "^0.1.2",
     "express": "^4.13.3",
     "sequelize": "^3.8.0",

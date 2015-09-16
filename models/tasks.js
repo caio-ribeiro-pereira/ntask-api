@@ -7,11 +7,9 @@ module.exports = (sequelize, DataType) => {
     },
     title: {
       type: DataType.STRING,
+      allowNull: false,
       validate: {
-        notEmpty: {
-          args: true,
-          msg: "Informe a tarefa"
-        }
+        notEmpty: true
       }
     },
     done: {
