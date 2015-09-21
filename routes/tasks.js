@@ -1,9 +1,8 @@
 module.exports = (app) => {
   var Tasks = app.db.models.Tasks;
 
-  app.route("/tasks/:id?")
+  app.route("/tasks")
     .all((req, res, next) => {
-      req.params = req.params.id ? req.params : {};
       delete req.body.id;
       next();
     })
@@ -26,14 +25,22 @@ module.exports = (app) => {
           res.status(412)
             .json({msg: error.message});
         });
-    })
+    });
+
+  app.route("/tasks/:id")
     .all((req, res, next) => {
-      if (req.params.id) {
-        next();
-      } else {
-        res.status(412)
-          .json({msg: "id is required"});
-      }
+      delete req.body.id;
+      next();
+    })
+    .get((req, res) => {
+      Tasks.findOne({where: req.params})
+        .then((result) => {
+          res.json(result);
+        })
+        .catch((error) => {
+          res.status(412)
+            .json({msg: error.message});
+        });
     })
     .put((req, res) => {
       Tasks.update(req.body, {where: req.params})
