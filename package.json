@@ -8,11 +8,12 @@
   },
   "author": "Caio Ribeiro Pereira",
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.13.3",
     "consign": "^0.1.2",
     "express": "^4.13.3",
     "passport": "^0.3.0",
-    "passport-http": "^0.3.0",
+    "passport-jwt": "^1.2.1",
     "sequelize": "^3.8.0",
     "sqlite3": "^3.1.0"
   }

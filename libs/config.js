@@ -9,5 +9,8 @@ module.exports = {
     define: {
       underscored: true
     }
+  },
+  jwt: {
+    secretOrKey: "Nta$K-AP1"
   }
 };

@@ -1,31 +1,26 @@
 const passport = require("passport");
-const Strategy = require("passport-http").BasicStrategy;
+const Strategy = require("passport-jwt").Strategy;
 
 module.exports = (app) => {
   var Users = app.db.models.Users;
-  var strategy = new Strategy(
-    (email, password, done) => {
-    Users.findOne({where: {email: email}})
+  var jwt = app.libs.config.jwt;
+  var strategy = new Strategy(jwt, (payload, done) => {
+    Users.findById(payload.sub)
       .then((user) => {
-        if (user) {
-          if (user.isValidPassword(password)) {
-            return done(null, user);
-          }
-          return done(null, false);
-        }
-        return done(null, false);
+        return done(null, user || false);
       })
       .catch((error) => {
-        return done(error);
+        return done(error, null);
       });
   });
   passport.use(strategy);
   
   return {
+    initialize: () => {
+      return passport.initialize();
+    },
     authenticate: () => {
-      return passport.authenticate("basic", {
-        session: false
-      });
+      return passport.authenticate("jwt", {session: false});
     }
   };
 };
