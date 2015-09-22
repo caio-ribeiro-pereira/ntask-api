@@ -2,6 +2,7 @@ module.exports = (app) => {
   var Tasks = app.db.models.Tasks;
 
   app.route("/tasks")
+    .all(app.auth.authenticate())
     .all((req, res, next) => {
       delete req.body.id;
       next();
@@ -28,6 +29,7 @@ module.exports = (app) => {
     });
 
   app.route("/tasks/:id")
+    .all(app.auth.authenticate())
     .all((req, res, next) => {
       delete req.body.id;
       next();

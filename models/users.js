@@ -19,11 +19,29 @@ module.exports = (sequelize, DataType) => {
       validate: {
         notEmpty: true
       }
+    },
+    password: {
+      type: DataType.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
     }
   }, {
+    hooks: {
+      beforeCreate: (user) => {
+        // Adicionar bcrypt
+      }
+    },
     classMethods: {
       associate: (models) => {
         Users.hasMany(models.Tasks);
+      }
+    },
+    instanceMethods: {
+      isValidPassword: (password) => {
+        // Adicionar bcrypt
+        return this.password === password;
       }
     }
   });
