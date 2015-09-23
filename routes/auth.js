@@ -9,28 +9,23 @@ module.exports = (app) => {
       var password = req.headers.password;
       Users.findOne({where: {email: email}})
         .then((user) => {
-          console.log(user.isPasswordMatch(password));
-          if (user.isPasswordMatch(password)) {
+          if (Users.isPassword(user.password, password)) {
             var payload = {
-              iss: user.id,
+              id: user.id,
               exp: Date.now() + cfg.jwtExpires
             };
-            console.log(payload);
             res.json({
               token: jwt.encode(payload, cfg.jwtSecret)
             });
           } else {
-            res.status(401)
-              .json({msg: "Authentication error"});  
+            res.sendStatus(401);
           }
         })
         .catch((error) => {
-          res.status(401)
-            .json({msg: "Authentication error"});
+          res.sendStatus(401);
         });
     } else {
-      res.status(401)
-        .json({msg: "Authentication error"});
+      res.sendStatus(401);
     }
   });
 };

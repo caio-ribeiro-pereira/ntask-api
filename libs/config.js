@@ -11,5 +11,6 @@ module.exports = {
     }
   },
   jwtSecret: "Nta$K-AP1",
-  jwtExpires: (86400000 * 7) // 7 dias
+  jwtExpires: (86400000 * 7), // 7 dias
+  jwtSession: {session: false}
 };

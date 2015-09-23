@@ -3,10 +3,11 @@ const Strategy = require("passport-jwt").Strategy;
 
 module.exports = (app) => {
   var Users = app.db.models.Users;
+  var cfg = app.libs.config;
   var strategy = new Strategy(
-    {secretOrKey: app.libs.config.jwtSecret}, 
+    {secretOrKey: cfg.jwtSecret}, 
     (payload, done) => {
-    Users.findById(payload.sub)
+    Users.findById(payload.id)
       .then((user) => {
         return done(null, user || false);
       })
@@ -21,7 +22,7 @@ module.exports = (app) => {
       return passport.initialize();
     },
     authenticate: () => {
-      return passport.authenticate("jwt", {session: false});
+      return passport.authenticate("jwt", cfg.jwtSession);
     }
   };
 };
