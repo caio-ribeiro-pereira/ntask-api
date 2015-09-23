@@ -3,7 +3,7 @@ module.exports = (app) => {
   var cfg = app.libs.config;
   var Users = app.db.models.Users;
 
-  app.get("/token", (req, res) => {
+  app.post("/token", (req, res) => {
     if (req.headers.email && req.headers.password) {
       var email = req.headers.email;
       var password = req.headers.password;
