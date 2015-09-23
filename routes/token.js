@@ -4,9 +4,9 @@ module.exports = (app) => {
   var Users = app.db.models.Users;
 
   app.post("/token", (req, res) => {
-    if (req.headers.email && req.headers.password) {
-      var email = req.headers.email;
-      var password = req.headers.password;
+    if (req.body.email && req.body.password) {
+      var email = req.body.email;
+      var password = req.body.password;
       Users.findOne({where: {email: email}})
         .then((user) => {
           if (Users.isPassword(user.password, password)) {
