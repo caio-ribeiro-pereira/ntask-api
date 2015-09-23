@@ -9,7 +9,13 @@ module.exports = (app) => {
     (payload, done) => {
     Users.findById(payload.id)
       .then((user) => {
-        return done(null, user || false);
+        if (user) {
+          return done(null, {
+            id: user.id, 
+            email: user.email
+          });  
+        }
+        return done(null, false);
       })
       .catch((error) => {
         return done(error, null);
