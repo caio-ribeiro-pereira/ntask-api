@@ -37,7 +37,11 @@ module.exports = (app) => {
         }
       })
       .then((result) => {
-        res.json(result);
+        if (result) {
+          res.json(result);
+        } else {
+          res.sendStatus(404);
+        }
       })
       .catch((error) => {
         res.status(412)
@@ -52,7 +56,7 @@ module.exports = (app) => {
         }
       })
       .then((result) => {
-        res.json(result);
+        res.sendStatus(204);
       })
       .catch((error) => {
         res.status(412)
@@ -67,7 +71,7 @@ module.exports = (app) => {
         }
       })
       .then((result) => {
-        res.json(result);
+        res.sendStatus(204);
       })
       .catch((error) => {
         res.status(412)
