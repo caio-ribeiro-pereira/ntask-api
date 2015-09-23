@@ -1,7 +1,5 @@
-var bcrypt = require("bcrypt");
-const SALT = 10;
-
 module.exports = (sequelize, DataType) => {
+  const bcrypt = require("bcrypt");
   var Users = sequelize.define("Users", {
     id: {
       type: DataType.INTEGER,
@@ -33,9 +31,8 @@ module.exports = (sequelize, DataType) => {
   }, {
     hooks: {
       beforeCreate: (user) => {
-        var salt = bcrypt.genSaltSync(SALT);
-        var password = user.password;
-        user.password = bcrypt.hashSync(password, salt);
+        var salt = bcrypt.genSaltSync();
+        user.password = bcrypt.hashSync(user.password, salt);
       }
     },
     classMethods: {
@@ -44,7 +41,9 @@ module.exports = (sequelize, DataType) => {
       }
     },
     instanceMethods: {
-      passwordMatch: (password) => {
+      isPasswordMatch: (password) => {
+        console.log(password);
+        console.log(this.password);
         return bcrypt.compareSync(password, this.password);
       }
     }

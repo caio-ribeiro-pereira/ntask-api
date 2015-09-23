@@ -3,8 +3,9 @@ const Strategy = require("passport-jwt").Strategy;
 
 module.exports = (app) => {
   var Users = app.db.models.Users;
-  var jwt = app.libs.config.jwt;
-  var strategy = new Strategy(jwt, (payload, done) => {
+  var strategy = new Strategy(
+    {secretOrKey: app.libs.config.jwtSecret}, 
+    (payload, done) => {
     Users.findById(payload.sub)
       .then((user) => {
         return done(null, user || false);

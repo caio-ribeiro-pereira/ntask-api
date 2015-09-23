@@ -10,7 +10,6 @@ module.exports = {
       underscored: true
     }
   },
-  jwt: {
-    secretOrKey: "Nta$K-AP1"
-  }
+  jwtSecret: "Nta$K-AP1",
+  jwtExpires: (86400000 * 7) // 7 dias
 };
