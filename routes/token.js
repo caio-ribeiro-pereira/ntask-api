@@ -8,7 +8,7 @@ module.exports = (app) => {
    * @apiGroup Credencial
    * @apiParam {String} email Email de usuário
    * @apiParam {String} password Senha de usuário
-   * @apiParamExample {json} Exemplo
+   * @apiParamExample {json} Entrada
    *    {
    *      "email": "john@connor.net",
    *      "password": "123456"

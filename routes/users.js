@@ -4,9 +4,12 @@ module.exports = (app) => {
   app.route("/user")
     .all(app.auth.authenticate())
     /**
-     * @api {get} /user Exibe usuário logado
+     * @api {get} /user Exibe usuário autenticado
      * @apiGroup Usuário
-     * @apiSuccess {String} id Id de registro
+     * @apiHeader {String} Authorization Token de usuário
+     * @apiHeaderExample {json} Header
+     *    {"Authorization": "JWT xyz.abc.123.hgf"}
+     * @apiSuccess {Number} id Id de registro
      * @apiSuccess {String} name Nome
      * @apiSuccess {String} email Email
      * @apiSuccessExample {json} Sucesso
@@ -29,8 +32,11 @@ module.exports = (app) => {
       });
     })
     /**
-     * @api {delete} /user Exclui usuário logado
+     * @api {delete} /user Exclui usuário autenticado
      * @apiGroup Usuário
+     * @apiHeader {String} Authorization Token de usuário
+     * @apiHeaderExample {json} Header
+     *    {"Authorization": "JWT xyz.abc.123.hgf"}
      * @apiSuccessExample {json} Sucesso
      *    HTTP/1.1 204 No Content
      * @apiErrorExample {json} Erro na exclusão
@@ -45,23 +51,23 @@ module.exports = (app) => {
     });
 
   /**
-   * @api {post} /users Cadastra usuário
+   * @api {post} /users Cadastra novo usuário
    * @apiGroup Usuário
    * @apiParam {String} name Nome
    * @apiParam {String} email Email
    * @apiParam {String} password Senha
-   * @apiParamExample {json} Exemplo
+   * @apiParamExample {json} Entrada
    *    {
    *      "name": "John Connor",
    *      "email": "john@connor.net",
    *      "password": "123456"
    *    }
-   * @apiSuccess {String} id Id de registro
+   * @apiSuccess {Number} id Id de registro
    * @apiSuccess {String} name Nome
    * @apiSuccess {String} email Email
    * @apiSuccess {String} password Senha criptografada
-   * @apiSuccess {String} updated_at Data de atualização
-   * @apiSuccess {String} created_at Data de cadastro
+   * @apiSuccess {Date} updated_at Data de atualização
+   * @apiSuccess {Date} created_at Data de cadastro
    * @apiSuccessExample {json} Sucesso
    *    HTTP/1.1 200 OK
    *    {
