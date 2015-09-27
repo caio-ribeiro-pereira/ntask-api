@@ -1,10 +1,10 @@
 module.exports = (app) => {
-  const bodyParser = require("body-parser");
-  const express = require("express");
+  import bodyParser from "body-parser";
+  import express from "express";
 
   app.set("port", 3000);
   app.set("json spaces", 4);
-  
+
   app.use(bodyParser.json());
   app.use(app.auth.initialize());
   app.use((req, res, next) => {
@@ -12,5 +12,5 @@ module.exports = (app) => {
     next();
   });
   app.use(express.static("public"));
-  
+
 };

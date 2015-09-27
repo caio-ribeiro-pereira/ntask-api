@@ -1,5 +1,5 @@
-const express = require("express");
-const consign = require("consign");
+import express from "express";
+import consign from "consign";
 
 let app = express();
 

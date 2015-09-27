@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataType) => {
-  const bcrypt = require("bcrypt");
+  import bcrypt from "bcrypt";
   let Users = sequelize.define("Users", {
     id: {
       type: DataType.INTEGER,

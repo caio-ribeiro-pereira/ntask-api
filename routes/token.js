@@ -1,5 +1,5 @@
 module.exports = (app) => {
-  const jwt = require("jwt-simple");
+  import jwt from "jwt-simple";
   let cfg = app.libs.config;
   let Users = app.db.models.Users;
 
