@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run apidoc && babel-node index.js",
+    "test": "NODE_ENV=test mocha test/",
     "apidoc": "apidoc -i routes/ -o public/apidoc"
   },
   "author": "Caio Ribeiro Pereira",
@@ -23,5 +24,8 @@
     "passport-jwt": "^1.2.1",
     "sequelize": "^3.9.0",
     "sqlite3": "^3.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.3"
   }
 }

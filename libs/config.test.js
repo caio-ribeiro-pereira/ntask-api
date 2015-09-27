@@ -1,16 +1,15 @@
 module.exports = {
-  database: "ntask",
+  database: "ntask_test",
   username: "",
   password: "",
   params: {
     dialect: "sqlite",
-    storage: "ntask.sqlite",
-    logging: console.log,
+    storage: "ntask_test.sqlite",
     define: {
       underscored: true
     }
   },
-  jwtSecret: "Nta$K-AP1",
-  jwtExpires: (86400000 * 7), // 7 dias
+  jwtSecret: "NTALK_TEST",
+  jwtExpires: 86400000, // 1 dia
   jwtSession: {session: false}
 };
