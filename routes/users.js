@@ -1,5 +1,5 @@
 module.exports = (app) => {
-  var Users = app.db.models.Users;
+  let Users = app.db.models.Users;
 
   app.route("/user")
     .all(app.auth.authenticate())

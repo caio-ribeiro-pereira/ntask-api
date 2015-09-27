@@ -1,12 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
-var db = null;
+let db = null;
 
 module.exports = (app) => {
   if (!db) {
-    var config = app.libs.config;
-    var sequelize = new Sequelize(
+    let config = app.libs.config;
+    let sequelize = new Sequelize(
       config.database,
       config.username,
       config.password,
@@ -17,10 +17,10 @@ module.exports = (app) => {
       Sequelize: Sequelize,
       models: {}
     };
-    var dir = path.join(__dirname, "models");
+    let dir = path.join(__dirname, "models");
     fs.readdirSync(dir).forEach((file) => {
-      var modelDir = path.join(dir, file);
-      var model = sequelize.import(modelDir);
+      let modelDir = path.join(dir, file);
+      let model = sequelize.import(modelDir);
       db.models[model.name] = model;
     });
     Object.keys(db.models).forEach((key) => {

@@ -4,7 +4,8 @@
   "description": "API de gestão de tarefas",
   "main": "index.js",
   "scripts": {
-    "start": "apidoc -i routes/ -o public/apidoc && node index.js"
+    "start": "npm run apidoc && node --use_strict index.js",
+    "apidoc": "apidoc -i routes/ -o public/apidoc"
   },
   "author": "Caio Ribeiro Pereira",
   "apidoc": {

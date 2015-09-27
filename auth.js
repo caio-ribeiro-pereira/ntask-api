@@ -2,18 +2,18 @@ const passport = require("passport");
 const Strategy = require("passport-jwt").Strategy;
 
 module.exports = (app) => {
-  var Users = app.db.models.Users;
-  var cfg = app.libs.config;
-  var strategy = new Strategy(
-    {secretOrKey: cfg.jwtSecret}, 
+  let Users = app.db.models.Users;
+  let cfg = app.libs.config;
+  let strategy = new Strategy(
+    {secretOrKey: cfg.jwtSecret},
     (payload, done) => {
     Users.findById(payload.id)
       .then((user) => {
         if (user) {
           return done(null, {
-            id: user.id, 
+            id: user.id,
             email: user.email
-          });  
+          });
         }
         return done(null, false);
       })
@@ -22,7 +22,7 @@ module.exports = (app) => {
       });
   });
   passport.use(strategy);
-  
+
   return {
     initialize: () => {
       return passport.initialize();

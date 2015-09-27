@@ -1,5 +1,5 @@
 module.exports = (app) => {
-  var Tasks = app.db.models.Tasks;
+  let Tasks = app.db.models.Tasks;
 
   app.route("/tasks")
     .all(app.auth.authenticate())

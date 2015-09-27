@@ -1,7 +1,7 @@
 const express = require("express");
 const consign = require("consign");
 
-var app = express();
+let app = express();
 
 consign()
   .include("libs/config.js")

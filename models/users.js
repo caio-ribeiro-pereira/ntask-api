@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataType) => {
   const bcrypt = require("bcrypt");
-  var Users = sequelize.define("Users", {
+  let Users = sequelize.define("Users", {
     id: {
       type: DataType.INTEGER,
       primaryKey: true,
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataType) => {
   }, {
     hooks: {
       beforeCreate: (user) => {
-        var salt = bcrypt.genSaltSync();
+        let salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync(user.password, salt);
       }
     },
