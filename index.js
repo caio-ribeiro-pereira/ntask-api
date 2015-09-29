@@ -1,11 +1,10 @@
 import express from "express";
 import consign from "consign";
 
-const ENV = process.env.NODE_ENV || "development";
 let app = express();
 
 consign()
-  .include(`libs/config.${ENV}.js`)
+  .include(`libs/config.js`)
   .then("db.js")
   .then("auth.js")
   .then("libs/middlewares.js")
