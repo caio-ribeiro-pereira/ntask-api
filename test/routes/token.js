@@ -7,9 +7,7 @@ describe("Routes: Token", () => {
           name: "John",
           email: "john@mail.net",
           password: "12345"
-        }).then((result) => {
-          done();
-        });
+        }).then(() => done());
       });
     });
     describe("status 200", () => {
