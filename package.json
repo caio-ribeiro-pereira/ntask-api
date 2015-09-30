@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run apidoc && babel-node index.js",
-    "test": "NODE_ENV=test mocha test/",
+    "test": "NODE_ENV=test mocha test/**/*.js",
     "apidoc": "apidoc -i routes/ -o public/apidoc"
   },
   "author": "Caio Ribeiro Pereira",
@@ -13,7 +13,6 @@
     "name": "Documentação - Node Task API"
   },
   "dependencies": {
-    "apidoc": "^0.13.1",
     "babel": "^5.8.23",
     "bcrypt": "^0.8.5",
     "body-parser": "^1.13.3",
@@ -27,6 +26,10 @@
     "sqlite3": "^3.1.0"
   },
   "devDependencies": {
-    "mocha": "^2.3.3"
+    "apidoc": "^0.13.1",
+    "babel-runtime": "^5.8.25",
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3",
+    "supertest": "^1.1.0"
   }
 }
