@@ -10,7 +10,7 @@ consign({verbose: false})
   .then("libs/middlewares.js")
   .then("routes")
   .into(app, () => {
-    app.db.sequelize.sync({}).done(() => {
+    app.db.sequelize.sync().done(() => {
       app.listen(app.get("port"), () => {
         if (process.env.NODE_ENV !== "test") {
           console.log(`NTask API - porta ${app.get("port")}`);

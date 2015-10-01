@@ -30,10 +30,7 @@ module.exports = (app) => {
       Users.findOne({where: {email: email}})
         .then((user) => {
           if (Users.isPassword(user.password, password)) {
-            let payload = {
-              id: user.id,
-              exp: Date.now() + cfg.jwtExpires
-            };
+            let payload = {id: user.id};
             res.json({
               token: jwt.encode(payload, cfg.jwtSecret)
             });
