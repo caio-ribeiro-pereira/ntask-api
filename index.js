@@ -9,7 +9,14 @@ consign({verbose: false})
   .then("auth.js")
   .then("libs/middlewares.js")
   .then("routes")
-  .then("libs/boot.js")
-  .into(app);
+  .into(app, () => {
+    app.db.sequelize.sync({}).done(() => {
+      app.listen(app.get("port"), () => {
+        if (process.env.NODE_ENV !== "test") {
+          console.log(`NTask API - porta ${app.get("port")}`);
+        }
+      });
+    });
+  });
 
 module.exports = app;
