@@ -25,7 +25,7 @@ describe("Routes: Tasks", () => {
         });
       });
     });
-  });
+  }); 
 
   describe("GET /tasks", () => {
     describe("status 200", () => {
@@ -43,7 +43,7 @@ describe("Routes: Tasks", () => {
     });
   });
 
-  describe("POST /tasks/", () => {
+  describe("POST /tasks", () => {
     describe("status 200", () => {
       it("creates a new task", (done) => {
         request.post("/tasks")
