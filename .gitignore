@@ -4,3 +4,4 @@ ntask.sqlite
 ntask_test.sqlite
 .DS_Store
 public/apidoc
+logs/*.log
