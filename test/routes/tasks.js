@@ -25,7 +25,7 @@ describe("Routes: Tasks", () => {
         });
       });
     });
-  }); 
+  });
 
   describe("GET /tasks", () => {
     describe("status 200", () => {
