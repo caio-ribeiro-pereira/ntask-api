@@ -1,29 +1,32 @@
+"use strict";
+
 import fs from "fs";
 import path from "path";
 import Sequelize from "sequelize";
+
 let db = null;
 
-module.exports = (app) => {
+module.exports = app => {
   if (!db) {
-    let config = app.libs.config;
-    let sequelize = new Sequelize(
+    const config = app.libs.config;
+    const sequelize = new Sequelize(
       config.database,
       config.username,
       config.password,
       config.params
     );
     db = {
-      sequelize: sequelize,
-      Sequelize: Sequelize,
+      sequelize,
+      Sequelize,
       models: {}
     };
-    let dir = path.join(__dirname, "models");
-    fs.readdirSync(dir).forEach((file) => {
-      let modelDir = path.join(dir, file);
-      let model = sequelize.import(modelDir);
+    const dir = path.join(__dirname, "models");
+    fs.readdirSync(dir).forEach(file => {
+      const modelDir = path.join(dir, file);
+      const model = sequelize.import(modelDir);
       db.models[model.name] = model;
     });
-    Object.keys(db.models).forEach((key) => {
+    Object.keys(db.models).forEach(key => {
       db.models[key].associate(db.models);
     });
   }

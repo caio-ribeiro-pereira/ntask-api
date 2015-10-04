@@ -1,26 +1,32 @@
+/* global describe, it, beforeEach, expect, app, request */
+/* eslint max-nested-callbacks: [2, 5], no-unused-vars: [2, { "args": "none" }] */
+
+"use strict";
+
 import jwt from "jwt-simple";
 
 describe("Routes: Tasks", () => {
-  let Users = app.db.models.Users;
-  let jwtSecret = app.libs.config.jwtSecret;
+  const Users = app.db.models.Users;
+  const jwtSecret = app.libs.config.jwtSecret;
   let token;
 
-  beforeEach((done) => {
-    Users.destroy({where: {}}).then(() => {
-      Users.create({
+  beforeEach(done => {
+    Users
+      .destroy({where: {}})
+      .then(() => Users.create({
         name: "John",
         email: "john@mail.net",
         password: "12345"
-      }).then((user) => {
+      }))
+      .then(user => {
         token = jwt.encode({id: user.id}, jwtSecret);
         done();
       });
-    });
   });
 
   describe("GET /user", () => {
     describe("status 200", () => {
-      it("returns an authenticated user", (done) => {
+      it("returns an authenticated user", done => {
         request.get("/user")
           .set("Authorization", `JWT ${token}`)
           .expect(200)
@@ -35,7 +41,7 @@ describe("Routes: Tasks", () => {
 
   describe("DELETE /user", () => {
     describe("status 200", () => {
-      it("deletes an authenticated user", (done) => {
+      it("deletes an authenticated user", done => {
         request.delete("/user")
           .set("Authorization", `JWT ${token}`)
           .expect(204)
@@ -46,7 +52,7 @@ describe("Routes: Tasks", () => {
 
   describe("POST /users", () => {
     describe("status 200", () => {
-      it("creates a new user", (done) => {
+      it("creates a new user", done => {
         request.post("/users")
           .send({
             name: "Mary",

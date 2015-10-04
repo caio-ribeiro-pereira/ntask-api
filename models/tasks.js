@@ -1,5 +1,7 @@
+"use strict";
+
 module.exports = (sequelize, DataType) => {
-  let Tasks = sequelize.define("Tasks", {
+  const Tasks = sequelize.define("Tasks", {
     id: {
       type: DataType.INTEGER,
       primaryKey: true,
@@ -19,7 +21,7 @@ module.exports = (sequelize, DataType) => {
     }
   }, {
     classMethods: {
-      associate: (models) => {
+      associate: models => {
         Tasks.belongsTo(models.Users);
       }
     }

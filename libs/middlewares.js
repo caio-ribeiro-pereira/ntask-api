@@ -1,3 +1,7 @@
+/* eslint no-unused-expressions: 0 */
+
+"use strict";
+
 import bodyParser from "body-parser";
 import express from "express";
 import morgan from "morgan";
@@ -7,7 +11,7 @@ import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
 
-module.exports = (app) => {
+module.exports = app => {
   fs.existsSync("logs") || fs.mkdirSync("logs");
   app.set("port", 3000);
   app.set("json spaces", 4);

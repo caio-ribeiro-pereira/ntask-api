@@ -1,7 +1,9 @@
+"use strict";
+
 import express from "express";
 import consign from "consign";
 
-let app = express();
+const app = express();
 
 consign({verbose: false})
   .include("libs/config.js")

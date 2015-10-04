@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = {
   database: "ntask_test",
   username: "",

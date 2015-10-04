@@ -1,4 +1,6 @@
-module.exports = (app) => {
+"use strict";
+
+module.exports = app => {
   /**
    * @api {get} / API Status
    * @apiGroup Status

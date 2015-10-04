@@ -1,13 +1,17 @@
+/* global describe, it, expect, request */
+
+"use strict";
+
 describe("Routes: Index", () => {
   describe("GET /", () => {
-    it("returns the API status", (done) => {
+    it("returns the API status", done => {
       request.get("/")
         .expect(200)
         .end((err, res) => {
-          let expected = {status: "NTask API"};
+          const expected = {status: "NTask API"};
           expect(res.body).to.eql(expected);
           done(err);
-      });
+        });
     });
   });
 });
