@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = app => {
   const Users = app.db.models.Users;
 

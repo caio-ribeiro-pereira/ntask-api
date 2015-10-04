@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = app => {
   const env = process.env.NODE_ENV;
   if (Boolean(env)) {

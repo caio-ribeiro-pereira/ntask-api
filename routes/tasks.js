@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = app => {
   const Tasks = app.db.models.Tasks;
 

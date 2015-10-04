@@ -6,7 +6,6 @@
   "scripts": {
     "start": "npm run apidoc && npm run clusters",
     "clusters": "babel-node clusters.js",
-    "pretest": "xo",
     "test": "NODE_ENV=test mocha test/**/*.js",
     "apidoc": "apidoc -i routes/ -o public/apidoc"
   },
@@ -37,25 +36,6 @@
     "chai": "^3.3.0",
     "mocha": "^2.3.3",
     "passport-stub": "^1.0.1",
-    "supertest": "^1.1.0",
-    "xo": "^0.9.0"
-  },
-  "xo": {
-    "envs": [
-      "es6",
-      "node"
-    ],
-    "esnext": true,
-    "ignores": [
-      "public/apidoc/**"
-    ],
-    "rules": {
-      "global-require": 0,
-      "no-unused-vars": [2, { "args": "none" }],
-      "camelcase": [2, {"properties": "never"}],
-      "quotes": [2, "double"],
-      "indent": [2, 2],
-      "arrow-parens": [2, "as-needed"]
-    }
+    "supertest": "^1.1.0"
   }
 }

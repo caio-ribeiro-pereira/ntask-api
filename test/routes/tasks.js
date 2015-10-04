@@ -1,10 +1,3 @@
-/* global describe, it, beforeEach, expect, app, request */
-/* eslint max-nested-callbacks: [2, 5] */
-/* eslint no-unused-vars: [2, { "args": "none" }] */
-/* eslint no-unused-expressions: 0 */
-
-"use strict";
-
 import jwt from "jwt-simple";
 
 describe("Routes: Tasks", () => {

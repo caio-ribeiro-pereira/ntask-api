@@ -1,7 +1,3 @@
-/* global describe, it, expect, request */
-
-"use strict";
-
 describe("Routes: Index", () => {
   describe("GET /", () => {
     it("returns the API status", done => {

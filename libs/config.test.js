@@ -1,12 +1,10 @@
-"use strict";
-
 module.exports = {
   database: "ntask_test",
   username: "",
   password: "",
   params: {
     dialect: "sqlite",
-    storage: "ntask_test.sqlite",
+    storage: "ntask.sqlite",
     logging: false,
     sync: {
       force: true

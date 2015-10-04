@@ -1,5 +1,3 @@
-"use strict";
-
 import bcrypt from "bcrypt";
 
 module.exports = (sequelize, DataType) => {
