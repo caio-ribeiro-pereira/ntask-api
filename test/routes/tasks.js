@@ -1,35 +1,50 @@
+/* global describe, it, beforeEach, expect, app, request */
+/* eslint max-nested-callbacks: [2, 5] */
+/* eslint no-unused-vars: [2, { "args": "none" }] */
+/* eslint no-unused-expressions: 0 */
+
+"use strict";
+
 import jwt from "jwt-simple";
 
 describe("Routes: Tasks", () => {
-  let Users = app.db.models.Users;
-  let Tasks = app.db.models.Tasks;
-  let jwtSecret = app.libs.config.jwtSecret;
-  let token, fakeTask;
+  const Users = app.db.models.Users;
+  const Tasks = app.db.models.Tasks;
+  const jwtSecret = app.libs.config.jwtSecret;
+  let token;
+  let fakeTask;
 
-  beforeEach((done) => {
-    Users.destroy({where: {}}).then(() => {
-      Users.create({
+  beforeEach(done => {
+    Users
+      .destroy({where: {}})
+      .then(() => Users.create({
         name: "John",
         email: "john@mail.net",
         password: "12345"
-      }).then((user) => {
-        Tasks.destroy({where: {}}).then(() => {
-          Tasks.bulkCreate([
-            {id: 1, title: "Work", user_id: user.id},
-            {id: 2, title: "Study", user_id: user.id}
-          ]).then((tasks) => {
+      }))
+      .then(user => {
+        Tasks
+          .destroy({where: {}})
+          .then(() => Tasks.bulkCreate([{
+            id: 1,
+            title: "Work",
+            user_id: user.id
+          }, {
+            id: 2,
+            title: "Study",
+            user_id: user.id
+          }]))
+          .then(tasks => {
             fakeTask = tasks[0];
             token = jwt.encode({id: user.id}, jwtSecret);
             done();
           });
-        });
       });
-    });
   });
 
   describe("GET /tasks", () => {
     describe("status 200", () => {
-      it("returns a list of tasks", (done) => {
+      it("returns a list of tasks", done => {
         request.get("/tasks")
           .set("Authorization", `JWT ${token}`)
           .expect(200)
@@ -45,7 +60,7 @@ describe("Routes: Tasks", () => {
 
   describe("POST /tasks", () => {
     describe("status 200", () => {
-      it("creates a new task", (done) => {
+      it("creates a new task", done => {
         request.post("/tasks")
           .set("Authorization", `JWT ${token}`)
           .send({title: "Run"})
@@ -61,18 +76,18 @@ describe("Routes: Tasks", () => {
 
   describe("GET /tasks/:id", () => {
     describe("status 200", () => {
-      it("returns one task", (done) => {
+      it("returns one task", done => {
         request.get(`/tasks/${fakeTask.id}`)
           .set("Authorization", `JWT ${token}`)
           .expect(200)
           .end((err, res) => {
             expect(res.body.title).to.eql("Work");
-            done(err)
+            done(err);
           });
       });
     });
     describe("status 404", () => {
-      it("throws error when task not exist", (done) => {
+      it("throws error when task not exist", done => {
         request.get("/tasks/0")
           .set("Authorization", `JWT ${token}`)
           .expect(404)
@@ -83,10 +98,13 @@ describe("Routes: Tasks", () => {
 
   describe("PUT /tasks/:id", () => {
     describe("status 204", () => {
-      it("updates a task", (done) => {
+      it("updates a task", done => {
         request.put(`/tasks/${fakeTask.id}`)
           .set("Authorization", `JWT ${token}`)
-          .send({title: "Travel", done: true})
+          .send({
+            title: "Travel",
+            done: true
+          })
           .expect(204)
           .end((err, res) => done(err));
       });
@@ -95,7 +113,7 @@ describe("Routes: Tasks", () => {
 
   describe("DELETE /tasks/:id", () => {
     describe("status 204", () => {
-      it("removes a task", (done) => {
+      it("removes a task", done => {
         request.delete(`/tasks/${fakeTask.id}`)
           .set("Authorization", `JWT ${token}`)
           .expect(204)
@@ -103,5 +121,4 @@ describe("Routes: Tasks", () => {
       });
     });
   });
-
 });
