@@ -1,22 +1,20 @@
 import bodyParser from "body-parser";
 import express from "express";
 import morgan from "morgan";
-import FSRotator from "file-stream-rotator";
-import fs from "fs";
 import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
+import logger from "./logger.js";
 
 module.exports = app => {
-  fs.existsSync("logs") || fs.mkdirSync("logs");
   app.set("port", 3000);
   app.set("json spaces", 4);
   app.use(morgan("common", {
-    stream: FSRotator.getStream({
-      filename: "logs/access-%DATE%.log",
-      frequency: "daily",
-      verbose: false
-    })
+    stream: {
+      write: (message) => {
+        logger.info(message);
+      }
+    }
   }));
   app.use(helmet());
   app.use(cors({
