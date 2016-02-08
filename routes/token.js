@@ -27,7 +27,7 @@ module.exports = app => {
     if (req.body.email && req.body.password) {
       const email = req.body.email;
       const password = req.body.password;
-      Users.findOne({where: {email}})
+      Users.findOne({where: {email: email}})
         .then(user => {
           if (Users.isPassword(user.password, password)) {
             const payload = {id: user.id};
