@@ -7,10 +7,10 @@
     "start": "npm run apidoc && npm run clusters",
     "clusters": "babel-node clusters.js",
     "test": "NODE_ENV=test mocha test/**/*.js",
-    "apidoc": "apidoc -i routes/ -o public/apidoc"
+    "apidoc": "apidoc -i routes -o public/apidoc"
   },
   "apidoc": {
-    "name": "Node Task API - Documentation",
+    "name": "Node Task - Documentação de API",
     "template": {
       "forceLanguage": "pt_br"
     }
