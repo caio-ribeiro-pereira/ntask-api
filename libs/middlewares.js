@@ -2,8 +2,8 @@ import bodyParser from "body-parser";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import helmet from "helmet";
 import compression from "compression";
+import helmet from "helmet";
 import logger from "./logger.js";
 
 module.exports = app => {

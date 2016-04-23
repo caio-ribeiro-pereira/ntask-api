@@ -13,6 +13,7 @@ if (cluster.isMaster) {
   cluster.on("exit", worker => {
     console.log("Cluster %d saiu do ar", worker.process.pid);
     cluster.fork();
+    // Garante que um novo cluster inicie se um antigo morrer
   });
 } else {
   require("./index.js");

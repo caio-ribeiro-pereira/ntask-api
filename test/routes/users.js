@@ -4,7 +4,6 @@ describe("Routes: Tasks", () => {
   const Users = app.db.models.Users;
   const jwtSecret = app.libs.config.jwtSecret;
   let token;
-
   beforeEach(done => {
     Users
       .destroy({where: {}})
@@ -18,7 +17,6 @@ describe("Routes: Tasks", () => {
         done();
       });
   });
-
   describe("GET /user", () => {
     describe("status 200", () => {
       it("returns an authenticated user", done => {
@@ -33,9 +31,8 @@ describe("Routes: Tasks", () => {
       });
     });
   });
-
   describe("DELETE /user", () => {
-    describe("status 200", () => {
+    describe("status 204", () => {
       it("deletes an authenticated user", done => {
         request.delete("/user")
           .set("Authorization", `JWT ${token}`)
@@ -44,7 +41,6 @@ describe("Routes: Tasks", () => {
       });
     });
   });
-
   describe("POST /users", () => {
     describe("status 200", () => {
       it("creates a new user", done => {
