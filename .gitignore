@@ -3,5 +3,5 @@ npm-debug.log
 ntask.sqlite
 ntask_test.sqlite
 .DS_Store
-public/apidoc
+public/docs
 logs/*.log
