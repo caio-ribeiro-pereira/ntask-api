@@ -1,7 +1,7 @@
 module.exports = app => {
-  const Users = app.db.models.Users;
+  const Users = app.models.users;
 
-  app.route("/user")
+  app.route('/user')
     .all(app.auth.authenticate())
     /**
      * @api {get} /user Exibe usuário autenticado
@@ -22,16 +22,20 @@ module.exports = app => {
      * @apiErrorExample {json} Erro de consulta
      *    HTTP/1.1 412 Precondition Failed
      */
-    .get((req, res) => {
-      Users.findById(req.user.id, {
-        attributes: ["id", "name", "email"]
-      })
-      .then(result => {
-        res.json(result);
-      })
-      .catch(error => {
-        res.status(412).json({msg: error.message});
-      });
+    .get(async (req, res) => {
+      try {
+        const { id } = req.user;
+        const attributes = ['id', 'name', 'email'];
+        const options = { attributes };
+        const result = await Users.findByPk(id, options);
+        if (result) {
+          res.json(result);
+        } else {
+          res.sendStatus(404);
+        }
+      } catch (err) {
+        res.status(412).json({ msg: err.message });
+      }
     })
     /**
      * @api {delete} /user Exclui usuário autenticado
@@ -44,14 +48,15 @@ module.exports = app => {
      * @apiErrorExample {json} Erro na exclusão
      *    HTTP/1.1 412 Precondition Failed
      */
-    .delete((req, res) => {
-      Users.destroy({where: {id: req.user.id}})
-        .then(result => {
-          res.sendStatus(204);
-        })
-        .catch(error => {
-          res.status(412).json({msg: error.message});
-        });
+    .delete(async (req, res) => {
+      try {
+        const { id } = req.user;
+        const where = { id };
+        await Users.destroy({ where });
+        res.sendStatus(204);
+      } catch (err) {
+        res.status(412).json({ msg: err.message });
+      }
     });
 
   /**
@@ -85,13 +90,13 @@ module.exports = app => {
    * @apiErrorExample {json} Erro no cadastro
    *    HTTP/1.1 412 Precondition Failed
    */
-  app.post("/users", (req, res) => {
-    Users.create(req.body)
-      .then(result => {
-        res.json(result);
-      })
-      .catch(error => {
-        res.status(412).json({msg: error.message});
-      });
+  app.post('/users', async (req, res) => {
+    try {
+      const result = await Users.create(req.body);
+      res.json(result);
+    } catch (err) {
+      res.status(412).json({ msg: err.message });
+    }
   });
+
 };

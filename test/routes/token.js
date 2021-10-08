@@ -1,64 +1,56 @@
-describe("Routes: Token", () => {
-  const Users = app.db.models.Users;
+describe('Routes: Token', () => {
+  const Users = app.models.users;
 
-  describe("POST /token", () => {
-    beforeEach(done => {
-      Users
-        .destroy({where: {}})
-        .then(() => Users.create({
-          name: "John",
-          email: "john@mail.net",
-          password: "12345"
-        }))
-        .then(done());
+  describe('POST /token', () => {
+    beforeEach(async () => {
+      await Users.destroy({ where: {} });
+      await Users.create({
+        name: 'John',
+        email: 'john@mail.net',
+        password: '12345'
+      });
     });
 
-    describe("status 200", () => {
-      it("returns authenticated user token", done => {
-        request.post("/token")
+    describe('status 200', () => {
+      it('returns authenticated user token', done => {
+        request.post('/token')
           .send({
-            email: "john@mail.net",
-            password: "12345"
+            email: 'john@mail.net',
+            password: '12345'
           })
           .expect(200)
           .end((err, res) => {
-            expect(res.body).to.include.keys("token");
+            expect(res.body).to.include.keys('token');
             done(err);
           });
       });
     });
 
-    describe("status 401", () => {
-      it("throws error when password is incorrect", done => {
-        request.post("/token")
+    describe('status 401', () => {
+      it('throws error when password is incorrect', done => {
+        request.post('/token')
           .send({
-            email: "john@mail.net",
-            password: "SENHA_ERRADA"
+            email: 'john@mail.net',
+            password: 'SENHA_ERRADA'
           })
           .expect(401)
-          .end((err, res) => {
-            done(err);
-          });
+          .end(done);
       });
-
-      it("throws error when email not exist", done => {
-        request.post("/token")
+      
+      it('throws error when email not exists', done => {
+        request.post('/token')
           .send({
-            email: "EMAIL_ERRADO",
-            password: "SENHA_ERRADA"
+            email: 'EMAIL_ERRADO',
+            password: 'SENHA_ERRADA'
           })
           .expect(401)
-          .end((err, res) => {
-            done(err);
-          });
+          .end(done);
       });
 
-      it("throws error when email and password are blank", done => {
-        request.post("/token")
+      it('throws error when fields are blank', done => {
+        request.post('/token')
           .expect(401)
-          .end((err, res) => {
-            done(err);
-          });
+          .end(done);
       });
     });
   });

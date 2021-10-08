@@ -1,15 +1,16 @@
-import express from "express";
-import consign from "consign";
+const express = require('express');
+const consign = require('consign');
 
 const app = express();
 
-consign({verbose: false})
-  .include("libs/config.js")
-  .then("db.js")
-  .then("auth.js")
-  .then("libs/middlewares.js")
-  .then("routes")
-  .then("libs/boot.js")
+consign({ verbose: false })
+  .include('db.js')
+  .then('models')
+  .then('associations.js')
+  .then('auth.js')
+  .then('middlewares.js')
+  .then('routes')
+  .then('boot.js')
   .into(app);
 
 module.exports = app;

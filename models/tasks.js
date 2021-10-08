@@ -1,28 +1,25 @@
-module.exports = (sequelize, DataType) => {
-  const Tasks = sequelize.define("Tasks", {
+const { DataTypes } = require('sequelize');
+
+module.exports = (app) => {
+  const Tasks = app.db.define('Tasks', {
     id: {
-      type: DataType.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     title: {
-      type: DataType.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
     done: {
-      type: DataType.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
     }
-  }, {
-    classMethods: {
-      associate: models => {
-        Tasks.belongsTo(models.Users);
-      }
-    }
   });
+
   return Tasks;
 };

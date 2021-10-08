@@ -1,17 +1,18 @@
 # NTask API
 
 API Node.js para gestão de tarefas.  
-Este é um projeto para fins educativos sobre como construir um API usando Node.js com banco de dados SQL e autenticação via JSON Web Token
+Este é um projeto para fins educativos sobre como construir um API usando Node.js com banco de dados SQL e autenticação via JSON Web Token e é um projeto utilizado no livro Construindo APIs REST com Node.js da editora Casa do Código:
+
+Link do ebook: https://www.casadocodigo.com.br/products/livro-apis-nodejs
 
 ## Módulos
 
-* [Express](http://expressjs.com/) - Web Framework
-* [Sequelize](http://docs.sequelizejs.com/en/latest/) - ORM compatível com bancos de dados SQL
-* [Passport](http://passportjs.org/) - Middleware para autenticação de usuários
-* [Mocha](https://mochajs.org/) - Test Runner para Node.js
-* [Chai](http://chaijs.com/) - Interface BDD e TDD para implementação de testes
-* [ApiDoc](http://apidocjs.com/) - Gerador de documentação de APIs baseado em comentários no código
-* [Babel](https://babeljs.io/) - Transpiler EcmaScript 6
+* [Express](https://expressjs.com/) - Web Framework
+* [Sequelize](https://sequelizejs.com) - ORM compatível com bancos de dados SQL
+* [Passport](https://passportjs.org) - Middleware para autenticação de usuários
+* [Mocha](https://mochajs.org) - Test Runner para Node.js
+* [Chai](https://chaijs.com) - Interface BDD e TDD para implementação de testes
+* [ApiDoc](https://apidocjs.com) - Gerador de documentação de APIs baseado em comentários no código
 
 E tem mais no [package.json](https://github.com/caio-ribeiro-pereira/ntask-api/blob/master/package.json) do projeto.
 
@@ -25,4 +26,4 @@ E tem mais no [package.json](https://github.com/caio-ribeiro-pereira/ntask-api/b
 
 ## About
 
-Caio Ribeiro Pereira - http://crpwebdev.com
+Caio Ribeiro Pereira - https://crpwebdev.github.io
